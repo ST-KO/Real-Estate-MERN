@@ -1,0 +1,15 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid red;
+    height: 100px;
+
+    .left{
+        flex: 3;
+    }
+    .right{
+        flex: 2;
+        // flex: 1;
+    }
+}

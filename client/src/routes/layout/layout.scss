@@ -28,7 +28,7 @@
     }
 
     .content {
-        // height: calc(100vh - 100px); // 100px is navbar and the rest is 100vh - 100px
-        flex: 1; // or can set flex to 1
+        height: calc(100vh - 100px); // 100px is navbar and the rest is 100vh - 100px
+        // flex: 1; // or can set flex to 1
     }
 }

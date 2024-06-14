@@ -1,6 +1,12 @@
+@import '../../responsive.scss';
+
 .card {
     display: flex;
     gap: 20px;
+
+    @include sm {
+        flex-direction: column;
+    }
 
     .imageContainer {
         flex: 2;

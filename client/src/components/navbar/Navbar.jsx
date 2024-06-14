@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './navbar.scss';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   
   const [open, setOpen] = useState(false);
+
+  const user = true;
   
   return (
     <nav>
@@ -18,8 +21,25 @@ const Navbar = () => {
           <a href="/">Agents</a>
         </div>
         <div className='right'>
-          <a href="/">Sign In</a>
-          <a href="/" className='register'>Sign Out</a>
+          {
+            user ? 
+            (
+              <div className='user'>
+                <img src="/favicon.png" alt="" />
+                <span>John Doe</span>
+                <Link to='/profile' className='profile' >
+                  <div className="notification">3</div>
+                  <span>Profile</span>
+                </Link>
+              </div>
+            ) :
+            (
+              <>
+                <a href="/">Sign In</a>
+                <a href="/" className='register'>Sign Up</a>
+              </>
+            )
+          }
           <div className='menuIcon'>
             <img 
               src="/menu.png" 

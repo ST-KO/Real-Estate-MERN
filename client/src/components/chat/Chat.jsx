@@ -85,7 +85,7 @@ const Chat = () => {
                         </div>
         
                         <div className="bottom">
-                            <textArea placeholder='Write a message...'></textArea>
+                            <textarea placeholder='Write a message...'/>
                             <button>Send</button>
                         </div>
                     </div>  

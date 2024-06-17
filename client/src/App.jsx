@@ -3,10 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './routes/home/Home';
 import ListPage from './routes/listPage/ListPage';
 import SinglePage from './routes/singlePage/SinglePage';
-import Layout from './routes/layout/Layout';
+import { Layout, RequireAuth } from './routes/layout/Layout';
 import LoginPage from './routes/login/LoginPage';
 import ProfilePage from './routes/profile/ProfilePage';
 import Register from './routes/register/Register';
+import ProfileUpdate from './routes/profileUpdate/ProfileUpdate';
 
 function App() {
   
@@ -18,11 +19,18 @@ function App() {
         { index: true, element: <Home /> },
         { path: "/list", element: <ListPage /> },
         { path: "/:id", element: <SinglePage /> },
-        { path: "/profile", element: <ProfilePage /> },
         { path: "/login", element: <LoginPage /> },
         { path: "/register", element: <Register /> },
       ]
     },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        { path: "/profile", element: <ProfilePage /> },
+        { path: "/profile/update", element: <ProfileUpdate /> },
+      ]
+    }
   ]);
   
   return (

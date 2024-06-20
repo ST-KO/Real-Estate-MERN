@@ -11,7 +11,7 @@ const ProfileUpdate = () => {
 
     const [error, setError] = useState("");
 
-    const [avatar, setAvatar] = useState(currentUser.avatar);
+    const [avatar, setAvatar] = useState([]);
 
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const ProfileUpdate = () => {
 
         try {
            const response = await apiRequest.put(`/users/${currentUser.id}`, 
-           {username, email, password, avatar}); 
+           {username, email, password, avatar: avatar[0]}); 
 
             updateUser(response.data);
             navigate('/profile');
@@ -69,7 +69,7 @@ const ProfileUpdate = () => {
                 </form>
             </div>
             <div className="sideContainer">
-                <img src={avatar || '/profile-icon.webp'} alt="" className="avatar" />
+                <img src={avatar[0] || currentUser.avatar || '/profile-icon.webp'} alt="" className="avatar" />
                 <CloudinaryUploadWidget 
                     uwConfig={
                         {
@@ -80,7 +80,7 @@ const ProfileUpdate = () => {
                             folder: "avatars"
                         }
                     }
-                    setAvatar={setAvatar}
+                    setState={setAvatar}
                 />
             </div>
         </section>

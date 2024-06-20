@@ -8,6 +8,7 @@ import LoginPage from './routes/login/LoginPage';
 import ProfilePage from './routes/profile/ProfilePage';
 import Register from './routes/register/Register';
 import ProfileUpdate from './routes/profileUpdate/ProfileUpdate';
+import NewPostPage from './routes/newPostPage/NewPostPage';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
       children: [
         { path: "/profile", element: <ProfilePage /> },
         { path: "/profile/update", element: <ProfileUpdate /> },
+        { path: "/add", element: <NewPostPage /> }
       ]
     }
   ]);

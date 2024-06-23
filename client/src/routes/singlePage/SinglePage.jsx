@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './singlePage.scss';
 import Slider from '../../components/slider/Slider';
-import { singlePostData, userData } from '../../lib/dummyData';
 import Map from '../../components/map/Map';
-import { useLoaderData } from 'react-router-dom';
+import { redirect, useLoaderData } from 'react-router-dom';
 import DOMPurify from 'dompurify';
+import { AuthContext } from '../../context/AuthContext'
+import apiRequest from '../../lib/apiRequest';
 
 const SinglePage = () => {
   
+  const {currentUser} = useContext(AuthContext);
+
   const posts = useLoaderData();
-  console.log(posts);
+
+  const [postSaved, setPostSaved] = useState(posts.isSaved);
+
+  const handleSavePost = async () => {
+    // AFTER REACT 19, UPDATE THIS TO USEOPTIMISTIK HOOK
+    setPostSaved(prevValue => !prevValue);
+
+    // If user is not logged in when saving posts, redirect to login page
+    if(!currentUser) {
+      redirect('/login');
+    }
+    
+    try {
+      await apiRequest.post("/users/save", {postId: posts.id});
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   return (
     <section className='singlePage'>
@@ -128,9 +148,16 @@ const SinglePage = () => {
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
-            <button>
+            <button 
+              onClick={handleSavePost}
+              style={{
+                backgroundColor: postSaved ?  "#fece51" : "white"
+              }}
+            >
               <img src="/save.png" alt="" />
-              Save the Place
+              {
+                postSaved ?  "Place Saved" : "Save the Place"
+              }
             </button>
           </div>
         </div>

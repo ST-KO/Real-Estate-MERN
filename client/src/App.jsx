@@ -9,7 +9,7 @@ import ProfilePage from './routes/profile/ProfilePage';
 import Register from './routes/register/Register';
 import ProfileUpdate from './routes/profileUpdate/ProfileUpdate';
 import NewPostPage from './routes/newPostPage/NewPostPage';
-import { listPageLoader, singlePageLoader } from './lib/loaders';
+import { listPageLoader, profilePageLoader, singlePageLoader } from './lib/loaders';
 
 function App() {
   
@@ -29,7 +29,7 @@ function App() {
       path: "/",
       element: <RequireAuth />,
       children: [
-        { path: "/profile", element: <ProfilePage /> },
+        { path: "/profile", element: <ProfilePage />, loader: profilePageLoader },
         { path: "/profile/update", element: <ProfileUpdate /> },
         { path: "/add", element: <NewPostPage /> }
       ]

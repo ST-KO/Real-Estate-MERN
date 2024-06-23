@@ -109,6 +109,34 @@ export const savePost = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Failed to get users" });
+    res.status(500).json({ message: "Failed to get saved posts" });
+  }
+};
+
+export const profilePosts = async (req, res) => {
+  const tokenUserId = req.params.userId;
+
+  try {
+    const userPosts = await prisma.post.findMany({
+      where: {
+        userId: tokenUserId,
+      },
+    });
+
+    const userSavedPosts = await prisma.savedPost.findMany({
+      where: {
+        userId: tokenUserId,
+      },
+      include: {
+        post: true,
+      },
+    });
+
+    // Only get savedposts associated with this user
+    const savedPosts = userSavedPosts.map((item) => item.post);
+    res.status(200).json({ userPosts, savedPosts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to get profile posts!" });
   }
 };

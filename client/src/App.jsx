@@ -9,6 +9,7 @@ import ProfilePage from './routes/profile/ProfilePage';
 import Register from './routes/register/Register';
 import ProfileUpdate from './routes/profileUpdate/ProfileUpdate';
 import NewPostPage from './routes/newPostPage/NewPostPage';
+import { listPageLoader, singlePageLoader } from './lib/loaders';
 
 function App() {
   
@@ -18,8 +19,8 @@ function App() {
       element: <Layout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/list", element: <ListPage /> },
-        { path: "/:id", element: <SinglePage /> },
+        { path: "/list", element: <ListPage />, loader: listPageLoader },
+        { path: "/:id", element: <SinglePage />, loader: singlePageLoader },
         { path: "/login", element: <LoginPage /> },
         { path: "/register", element: <Register /> },
       ]
